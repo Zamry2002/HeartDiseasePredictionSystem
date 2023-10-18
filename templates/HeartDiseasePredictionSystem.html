@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+    <title>Heart Disease Prediction Using ML</title>
+</head>
+<style>
+    body {
+        background-color: lightblue;
+        font-family: Arial, sans-serif;
+    }
+
+    h1, h5 {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    form {
+        margin: 0 auto;
+        max-width: 500px;
+        padding: 20px;
+        background-color: #F3EFEF;
+        border: 2px solid #517fa4;
+        border-radius: 8px;
+    }
+
+    form fieldset {
+        border: 2px groove #5a5a5a;
+        background-color: #f5f5f5;
+        padding: 20px;
+    }
+
+    fieldset h1 {
+        color: #5a5a5a;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    label {
+        display: block;
+        margin-top: 10px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    input, select {
+        width: 60%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    select {
+        height: 40px;
+    }
+
+    button {
+        margin-top: 20px;
+        background-color: #5a5a5a;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+
+    .result {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+</style>
+<body>
+<div style="text-align: center;">
+    <h1 style="text-align:center;">Heart Disease Prediction</h1>
+    <h5 style="text-align:center;">Please enter the patient details</h5>
+    <form id="apiForm" action="http://127.0.0.1:5000/predict" method="POST">
+        <p>
+            <label for="age">Age:</label>
+            <label>
+                <input type="text" name="Age" required>
+            </label>
+        </p>
+        <p>
+            <label for="sex">Sex:</label>
+            <select name="sex" id="sex">
+            <option value="1">Male</option>
+            <option value="0">Female</option>
+            </select>
+        </p>
+         <p>
+           <label for="chestPainTypes">Chest Pain Types:</label>
+           <select name="chestPainTypes" id="chestPainTypes">
+           <option value="0">Typical Angina</option>
+           <option value="1">Atypical Angina</option>
+               <option value="2">Non-Anginal</option>
+               <option value="3">Asymptomatic</option>
+             </select><br>
+        </p>
+        <p>
+            <label for="trestBps">Resting Blood Pressure:</label>
+            <label>
+                <input type="text" name="trestBps" required>
+            </label>
+        </p>
+        <p>
+            <label for="SerumCholesterol">Serum Cholesterol in mg/dl:</label>
+            <label>
+                <input type="text" name="SerumCholesterol" required>
+            </label>
+        </p>
+        <p>
+            <label for="FastingBloodSugar">Fasting Blood Sugar >120mg/dl:</label>
+            <select name="FastingBloodSugar" id="FastingBloodSugar">
+             <option value="1">True</option>
+             <option value="0">False</option>
+             </select>
+        </p>
+         <p>
+            <label for="ecg_results">Resting Electrocardiographic Results:</label>
+              <select name="ecg_results" id="ecg_results">
+              <option value="0">Normal (0)</option>
+              <option value="1">Abnormal (1)</option>
+              <option value="2">Showing Probable LVH (2)</option>
+             </select>
+        </p>
+        <p>
+            <label for="MaximumHeartRate">Maximum Heart Rate Achieved:</label>
+            <label>
+                <input type="text" name="MaximumHeartRate" required>
+            </label>
+        </p>
+        <p>
+        <label for="exercise_angina">Exercise Induced Angina:</label>
+        <select name="exercise_angina" id="exercise_angina">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+             </select>
+        </p>
+        <p>
+            <label for="stDepression">ST Depression Induced by Exercise:</label>
+            <label>
+                <input type="text" name="stDepression" required>
+            </label>
+        </p>
+        <p>
+            <label for="st_slope">Slope of Peak Exercise ST Segment:</label>
+           <select name="st_slope" id="st_slope">
+             <option value="0">Downsloping</option>
+             <option value="1">Flat</option>
+             <option value="2">Upsloping</option>
+             </select>
+        </p>
+        <p>
+            <label for="major_vessels">Number of Major Vessels Colored by Fluoroscopy:</label>
+            <select name="major_vessels" id="major_vessels">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+           </select>
+        </p>
+        <p>
+            <label for="thalassemia">Thalassemia:</label>
+              <select name="thalassemia" id="thalassemia">
+                <option value="0">Normal Blood Flow</option>
+                <option value="1">Fixed Defect</option>
+                <option value="2">Reversible Defect</option>
+           </select>
+        </p>
+            <button type="Submit" class="btn btn-primary btn-lg">Predict</button>
+        <h1>Prediction Result</h1>
+        <div class="result">
+            <p id="prediction_result">{{ result }}</p>
+    </div>
+    </form>
+    <a href="/">Logout</a>
+</div>
+</body>
+</html>

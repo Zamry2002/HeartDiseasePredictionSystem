@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Data</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
+</head>
+<body>
+<div class="container-fluid">
+<h1 class="text-center alert alert-danger">Patient Details</h1>
+<a href="/adminhome" style="float: right;">Admin Home</a>
+</div>
+ <div class="row">
+            <div class="col-sm-2"></div>
+
+            <!-- content goes here -->
+            <div class="col-sm-8">
+<h2 >Patient List <button class="btn btn-primary float-right" data-toggle="model" data-target="#myModel">Add Patient</button></h2>
+
+{%with messages = get_flashed_messages()%}
+{%if messages%}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissable" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    {{message}}
+</div>
+{%endfor%}
+{%endif%}
+{%endwith%}
+  <!-- Enter New Heart Model -->
+    <div id="myModel" class="modal fade" role="dialog">
+        <div class="model-dialog">
+            <div class="model-content">
+
+                <div class="model-header">
+                    <h5 class="model-title text-primary" style="align-content: center;">Please Add New Patient</h5>
+                    <button type="button" class="close" data-dismiss="model" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+
+                <div class="model-body">
+                    <form action="/details" method="post">
+                        <div class="form-group">
+                          <label>age</label>
+                          <input type="text" name="age" class="form-control" id="exampleFormControlInput1" placeholder="Enter Age">
+                        </div>
+
+                        <div class="form-group">
+                            <label>sex</label>
+                            <input type="text" name="sex" class="form-control" id="exampleFormControlInput1" placeholder="Enter Sex">
+                        </div>
+
+                        <div class="form-group">
+                            <label>cp</label>
+                            <input name="text" type="cp" class="form-control" id="exampleFormControlInput1" placeholder="Enter Chest Pain Type">
+                          </div>
+
+                        <div class="form-group">
+                            <label>trestbps</label>
+                            <input name="text" type="trestbps" class="form-control" id="exampleFormControlInput1" placeholder="Enter Resting Blood Pressure">
+                          </div>
+
+                        <div class="form-group">
+                            <label>chol</label>
+                            <input name="text" type="chol" class="form-control" id="exampleFormControlInput1" placeholder="Enter Cholesterol">
+                          </div>
+                        <div class="form-group">
+                            <label>fbs</label>
+                            <input name="text" type="fbs" class="form-control" id="exampleFormControlInput1" placeholder="Enter Fasting Blood Sugar">
+                          </div>
+
+                        <div class="form-group">
+                            <label>restecg</label>
+                            <input name="text" type="restecg" class="form-control" id="exampleFormControlInput1" placeholder="Enter RestEcg">
+                          </div>
+                        <div class="form-group">
+                            <label>thalach</label>
+                            <input name="text" type="thalach" class="form-control" id="exampleFormControlInput1" placeholder="Enter Heart Rate">
+                          </div>
+
+                        <div class="form-group">
+                            <label>exang</label>
+                            <input name="text" type="exang" class="form-control" id="exampleFormControlInput1" placeholder="Enter Angina">
+                          </div>
+                        <div class="form-group">
+                            <label>oldpeak</label>
+                            <input name="text" type="oldpeak" class="form-control" id="exampleFormControlInput1" placeholder="Enter OldPeak">
+                          </div>
+                        <div class="form-group">
+                            <label>slope</label>
+                            <input name="text" type="slope" class="form-control" id="exampleFormControlInput1" placeholder="Enter Slope">
+                          </div>
+                        <div class="form-group">
+                            <label>ca</label>
+                            <input name="text" type="ca" class="form-control" id="exampleFormControlInput1" placeholder="Enter Number of Major Vessels Colored by Fluoroscopy">
+                          </div>
+                        <div class="form-group">
+                            <label>thal</label>
+                            <input name="text" type="thal" class="form-control" id="exampleFormControlInput1" placeholder="Enter Thalassemia">
+                        </div>
+                         <div class="form-group">
+                            <label>target</label>
+                            <input name="text" type="target" class="form-control" id="exampleFormControlInput1" placeholder="Enter Target">
+                          </div>
+
+                          <button type="submit" class="btn btn-primary mb-2">Save</button>
+
+                      </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Enter New Heart Model -->
+
+
+<table class="table table-hover" >
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">age</th>
+            <th scope="col">sex</th>
+            <th scope="col">cp</th>
+            <th scope="col">trestbps</th>
+            <th scope="col">chol</th>
+            <th scope="col">fbs</th>
+            <th scope="col">restecg</th>
+            <th scope="col">thalach</th>
+             <th scope="col">exang</th>
+             <th scope="col">oldpeak</th>
+             <th scope="col">slope</th>
+             <th scope="col">ca</th>
+             <th scope="col">thal</th>
+            <th scope="col">target</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in heartdata %}
+        <tr>
+        <td>{{row.id}}</td>
+        <td>{{row.age}}</td>
+        <td>{{row.sex}}</td>
+        <td>{{row.cp}}</td>
+            <td>{{row.trestbps}}</td>
+            <td>{{row.chol}}</td>
+            <td>{{row.fbs}}</td>
+            <td>{{row.restecg}}</td>
+            <td>{{row.thalach}}</td>
+            <td>{{row.exang}}</td>
+            <td>{{row.oldpeak}}</td>
+            <td>{{row.slope}}</td>
+            <td>{{row.ca}}</td>
+            <td>{{row.thal}}</td>
+            <td>{{row.target}}</td>
+        </tr>
+          {% endfor %}
+    </tbody>
+</table>
+  </div>
+ </div>
+</body>
+</html>
